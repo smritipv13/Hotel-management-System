@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Bookings{% endblock %}
+{% block content %}
+<section class="page-header">
+    <div>
+        <p class="eyebrow">CRUD</p>
+        <h2>Bookings</h2>
+    </div>
+    <a class="button" href="{{ url_for('create_booking') }}">Add Booking</a>
+</section>
+
+<section class="panel">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Customer</th>
+                <th>Room</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.booking_id }}</td>
+                <td>{{ booking.customer_name }}</td>
+                <td>{{ booking.room_number }}</td>
+                <td>{{ booking.check_in }}</td>
+                <td>{{ booking.check_out }}</td>
+                <td><span class="badge">{{ booking.status }}</span></td>
+                <td class="actions">
+                    <a href="{{ url_for('edit_booking', booking_id=booking.booking_id) }}">Edit</a>
+                    <form method="post" action="{{ url_for('delete_booking', booking_id=booking.booking_id) }}">
+                        <button class="link danger" type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="7" class="empty">No bookings found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Database Error{% endblock %}
+{% block content %}
+<section class="panel">
+    <h2>Database Error</h2>
+    <p>{{ message }}</p>
+    <p>Make sure MySQL is running and the schema from <code>schema.sql</code> has been imported.</p>
+</section>
+{% endblock %}

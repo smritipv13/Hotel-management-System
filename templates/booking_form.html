@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{{ "Edit" if booking else "Add" }} Booking{% endblock %}
+{% block content %}
+<section class="page-header">
+    <div>
+        <p class="eyebrow">Booking</p>
+        <h2>{{ "Edit Booking" if booking else "Add Booking" }}</h2>
+    </div>
+</section>
+
+<form class="form-panel" method="post">
+    <label>Customer
+        <select name="customer_id" required>
+            {% for customer in customers %}
+            <option value="{{ customer.customer_id }}" {% if booking and booking.customer_id == customer.customer_id %}selected{% endif %}>{{ customer.name }}</option>
+            {% endfor %}
+        </select>
+    </label>
+    <label>Room
+        <select name="room_id" required>
+            {% for room in rooms %}
+            <option value="{{ room.room_id }}" {% if booking and booking.room_id == room.room_id %}selected{% endif %}>Room {{ room.room_number }}</option>
+            {% endfor %}
+        </select>
+    </label>
+    <label>Check In<input type="date" name="check_in" required min="{{ today }}" value="{{ booking.check_in if booking else today }}"></label>
+    <label>Check Out<input type="date" name="check_out" required value="{{ booking.check_out if booking else today }}"></label>
+    <label>Status
+        <select name="status" required>
+            {% for status in statuses %}
+            <option value="{{ status }}" {% if booking and booking.status == status %}selected{% endif %}>{{ status }}</option>
+            {% endfor %}
+        </select>
+    </label>
+    <div class="form-actions">
+        <a href="{{ url_for('bookings') }}">Cancel</a>
+        <button class="button" type="submit">Save Booking</button>
+    </div>
+</form>
+{% endblock %}

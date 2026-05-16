@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - Hotel Management System{% endblock %}
+{% block content %}
+<section class="page-header">
+    <div>
+        <p class="eyebrow">Overview</p>
+        <h2>Hotel Management Dashboard</h2>
+    </div>
+</section>
+
+<section class="stats-grid">
+    <article class="stat">
+        <span>Customers</span>
+        <strong>{{ stats.customers }}</strong>
+    </article>
+    <article class="stat">
+        <span>Rooms</span>
+        <strong>{{ stats.rooms }}</strong>
+    </article>
+    <article class="stat">
+        <span>Bookings</span>
+        <strong>{{ stats.bookings }}</strong>
+    </article>
+    <article class="stat">
+        <span>Paid Revenue</span>
+        <strong>Rs. {{ "%.2f"|format(stats.revenue) }}</strong>
+    </article>
+</section>
+
+<section class="panel">
+    <div class="section-title">
+        <h3>Recent Bookings</h3>
+        <a class="button" href="{{ url_for('create_booking') }}">New Booking</a>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Customer</th>
+                <th>Room</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in recent_bookings %}
+            <tr>
+                <td>{{ booking.booking_id }}</td>
+                <td>{{ booking.customer_name }}</td>
+                <td>{{ booking.room_number }}</td>
+                <td>{{ booking.check_in }}</td>
+                <td>{{ booking.check_out }}</td>
+                <td><span class="badge">{{ booking.status }}</span></td>
+            </tr>
+            {% else %}
+            <tr><td colspan="6" class="empty">No bookings yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

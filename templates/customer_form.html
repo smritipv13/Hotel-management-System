@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ "Edit" if customer else "Add" }} Customer{% endblock %}
+{% block content %}
+<section class="page-header">
+    <div>
+        <p class="eyebrow">Customer</p>
+        <h2>{{ "Edit Customer" if customer else "Add Customer" }}</h2>
+    </div>
+</section>
+
+<form class="form-panel" method="post">
+    <label>Name<input name="name" required value="{{ customer.name if customer else '' }}"></label>
+    <label>Email<input type="email" name="email_id" required value="{{ customer.email_id if customer else '' }}"></label>
+    <label>Phone<input name="phone_no" required value="{{ customer.phone_no if customer else '' }}"></label>
+    <label>Password Key<input name="passkey" required value="{{ customer.passkey if customer else '' }}"></label>
+    <label>Address<textarea name="address" required>{{ customer.address if customer else '' }}</textarea></label>
+    <div class="form-actions">
+        <a href="{{ url_for('customers') }}">Cancel</a>
+        <button class="button" type="submit">Save Customer</button>
+    </div>
+</form>
+{% endblock %}
