@@ -69,4 +69,9 @@ Example for PowerShell:
 $env:DB_PASSWORD="smriti"
 $env:DB_PORT="3307"
 python app.py
+
+## Recent Update
+
+- Created a new Git branch for learning Git workflow.
 ```
+Learning Git - Authentication Branch
